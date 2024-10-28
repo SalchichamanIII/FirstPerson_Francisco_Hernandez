@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
 {
+    [Header("Movimiento")]
     [SerializeField] private float velocidadMovimiento; 
+    [SerializeField] private float factorGravedad;
+    [Header("Deteccion Suelo")]
+    [SerializeField] private float radioDeteccion;
+    [SerializeField] private Transform pies;
+    [SerializeField] private LayerMask queEsSuelo;
+
 
     CharacterController controller;
+    //Me sirve tanto para la gravedad como para los saltos 
+    private Vector3 movimientoVertical;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -41,9 +51,26 @@ public class FirstPerson : MonoBehaviour
 
             controller.Move(movimiento * velocidadMovimiento * Time.deltaTime);
         }
+
+       
        
         //Vector3 movimiento = new Vector3(h, 0, v).normalized;
         //float anguloRotacion = Camera.main.transform.eulerAngles.y;
         //controller.Move(movimiento * velocidadMovimiento * Time.deltaTime);
+        AplicarGravedad();
+        EnSuelo();
+    }
+    private void AplicarGravedad()
+    {
+        //Mi velocidadVertical va en aumento a cierto factor por segundo 
+        movimientoVertical.y += factorGravedad * Time.deltaTime;
+        controller.Move(movimientoVertical * Time.deltaTime);
+    }
+
+    private bool EnSuelo()
+    {
+        //Tirar una esfera de deteccion en los pies con cierto radio 
+       bool resultado = Physics.CheckSphere(pies.position, radioDeteccion , queEsSuelo);
+        return resultado;
     }
 }
