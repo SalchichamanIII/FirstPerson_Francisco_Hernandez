@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
@@ -8,6 +10,8 @@ public class FirstPerson : MonoBehaviour
     [Header("Movimiento")]
     [SerializeField] private float velocidadMovimiento; 
     [SerializeField] private float factorGravedad;
+    [SerializeField] private float alturaSalto;
+
     [Header("Deteccion Suelo")]
     [SerializeField] private float radioDeteccion;
     [SerializeField] private Transform pies;
@@ -20,6 +24,8 @@ public class FirstPerson : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        //Bloquea el raton en centro de la pantalla y lo oculta
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -41,7 +47,9 @@ public class FirstPerson : MonoBehaviour
         //}
         //Calculo el angulo al que tengo que rotarme en funcion de los inputs y camara.
         float angulo = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-        transform.eulerAngles = new Vector3(0, angulo, 0);
+        //transform.eulerAngles = new Vector3(0, angulo, 0);
+
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         // Si el jugador tocla teclas
         if (input.magnitude > 0 )
         {
@@ -58,8 +66,21 @@ public class FirstPerson : MonoBehaviour
         //float anguloRotacion = Camera.main.transform.eulerAngles.y;
         //controller.Move(movimiento * velocidadMovimiento * Time.deltaTime);
         AplicarGravedad();
-        EnSuelo();
+        if (EnSuelo())
+        {
+            movimientoVertical.y = 0;
+            Saltar();
+        }
     }
+
+    private void Saltar()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            movimientoVertical.y = Mathf.Sqrt(-2 * factorGravedad * alturaSalto);
+        }
+    }
+
     private void AplicarGravedad()
     {
         //Mi velocidadVertical va en aumento a cierto factor por segundo 
@@ -73,4 +94,13 @@ public class FirstPerson : MonoBehaviour
        bool resultado = Physics.CheckSphere(pies.position, radioDeteccion , queEsSuelo);
         return resultado;
     }
+
+    //Metodo que se ejecuta automaticamente para dibujar cualquier figura 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(pies.position, radioDeteccion);
+
+    }
+    
 }
