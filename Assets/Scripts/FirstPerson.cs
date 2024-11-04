@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
 {
+    [SerializeField] private float vidas;
+    
     [Header("Movimiento")]
     [SerializeField] private float velocidadMovimiento; 
     [SerializeField] private float factorGravedad;
@@ -72,6 +74,12 @@ public class FirstPerson : MonoBehaviour
             Saltar();
         }
     }
+
+    public void RecibirDanho(float danhoEnemigo)
+    {
+        vidas -= danhoEnemigo;
+    }
+   
 
     private void Saltar()
     {
