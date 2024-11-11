@@ -102,6 +102,15 @@ public class FirstPerson : MonoBehaviour
        bool resultado = Physics.CheckSphere(pies.position, radioDeteccion , queEsSuelo);
         return resultado;
     }
+    //Sinoniomo de oncolli pero para un c.c
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("ParteEnemigo"))
+        {
+            Vector3 vectorPush = hit.gameObject.transform.position - transform.position;
+            hit.gameObject.GetComponent<Rigidbody>().AddForce(vectorPush.normalized *125, ForceMode.Impulse);
+        }
+    }
 
     //Metodo que se ejecuta automaticamente para dibujar cualquier figura 
     private void OnDrawGizmos()

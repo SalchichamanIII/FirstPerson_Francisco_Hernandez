@@ -22,6 +22,9 @@ public class Pedro : MonoBehaviour
     private bool ventanaAbierta;
     private bool puedoDanhar = true;
     Rigidbody[] huesos;
+
+    public float Vidas { get => vidas; set => vidas = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,15 +88,7 @@ public class Pedro : MonoBehaviour
             huesos[i].isKinematic = estado;
         }
     }
-    public void RecibirDanho(float danhoRecibido)
-    {
-        vidas -= danhoRecibido;
-
-        if (vidas <= 0)
-        {
-            CambiarEstadoHuesos(false);
-        }
-    }
+    
     private void AbrirVentana()
     {
         ventanaAbierta = true;
@@ -102,5 +97,13 @@ public class Pedro : MonoBehaviour
     private void CerrarVentanaAtaque()
     {
         ventanaAbierta |= false;
+    }
+
+    public void Morir()
+    {
+        CambiarEstadoHuesos(false);
+        anim.enabled = false;
+        agent.enabled = false ;
+        Destroy(gameObject, 15);
     }
 }
