@@ -40,7 +40,11 @@ public class Pedro : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Perseguir();
+        if (agent.enabled)
+        {
+            Perseguir();
+        }
+        
         if(ventanaAbierta && puedoDanhar)
         {
             DetectarImpacto();
@@ -67,7 +71,7 @@ public class Pedro : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
         //Si el enemigo esta a distancia de ataque de ti
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             agent.isStopped = true;
             anim.SetBool("attacking", true);
