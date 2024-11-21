@@ -26,4 +26,9 @@ public class ParteDeEnemigo : MonoBehaviour
             }
         }
     }
+
+    public void Explotar()
+    {
+
+    }
 }

@@ -7029,7 +7029,7 @@ MonoBehaviour:
   vidas: 100
   velocidadMovimiento: 3.39
   factorGravedad: -9.81
-  alturaSalto: 5
+  alturaSalto: 2.5
   radioDeteccion: 0.5
   pies: {fileID: 200942005}
   queEsSuelo:
