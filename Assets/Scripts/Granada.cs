@@ -6,7 +6,9 @@ public class Granada : MonoBehaviour
 {
     private Rigidbody rb;
     [SerializeField] private float fuerzaImpulso;
+    [Header("Explosion")]
     [SerializeField] private float radioExplosion;
+    [SerializeField] private float fuerzaExplosion;
     [SerializeField] private GameObject explosion;
     [SerializeField] private LayerMask queEsExplotable;
 
@@ -44,7 +46,7 @@ public class Granada : MonoBehaviour
                 //Y por cada col detectado (HUESOS) voy a coger el script de cada uno
                 if(buffer[i].TryGetComponent(out ParteDeEnemigo scriptHueso))
                 {
-                    scriptHueso.Explotar();
+                    scriptHueso.Explotar(fuerzaExplosion, transform.position, radioExplosion, 3.5f);
                 }
             }
         }

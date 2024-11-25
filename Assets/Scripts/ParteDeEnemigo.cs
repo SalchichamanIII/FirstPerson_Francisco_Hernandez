@@ -8,10 +8,10 @@ public class ParteDeEnemigo : MonoBehaviour
     [SerializeField] private Pedro mainScript;
     [SerializeField] private float multiplicadorDanho;
 
-
+    private Rigidbody rb;
     private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
     public void RecibirDanho(float danhoRecibido)
     {
@@ -27,8 +27,9 @@ public class ParteDeEnemigo : MonoBehaviour
         }
     }
 
-    public void Explotar()
+    public void Explotar(float fuerzaExplosion, Vector3 puntoImpacto , float radioExplosion , float upModifier)
     {
-
+        mainScript.Morir();
+        rb.AddExplosionForce(fuerzaExplosion, puntoImpacto, radioExplosion, upModifier, ForceMode.Impulse);
     }
 }
