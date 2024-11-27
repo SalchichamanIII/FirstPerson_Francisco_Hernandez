@@ -73,15 +73,30 @@ public class Pedro : MonoBehaviour
         //Si el enemigo esta a distancia de ataque de ti
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            agent.isStopped = true;
-            anim.SetBool("attacking", true);
+            //Lanza animacion de ataque
+            agent.isStopped = true;//Me paro
+            anim.SetBool("attacking", true);//Lanzo ataque
+            EnfocarObjetivo();
         }
+    }
+    private void EnfocarObjetivo()
+    {
+        //1.Calculo vector unitario que mira hacia el player  desde nuestra posicion
+        Vector3 direccionAObjetivo = player.transform.position - transform.position;
+
+        //1.5 Modifico la y del vector para prevenir que el enemigo se tumbe
+        direccionAObjetivo.y = 0;
+
+        //2. Calculo la rotacion para conseguir dicha direccion
+        Quaternion rotacionAObjetivo = Quaternion.LookRotation(direccionAObjetivo);
+
+        transform.rotation = rotacionAObjetivo;
     }
 
     private void FinAtaque()
     {
-        agent.isStopped = false;
-        anim.SetBool("attacking", false);
+        agent.isStopped = false;//Sigo moviendome
+        anim.SetBool("attacking", false);//Dejo atacar
         puedoDanhar = true;
     }
 
