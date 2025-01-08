@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FirstPerson : MonoBehaviour
 {
-    [SerializeField] private float vidas;
+    [SerializeField] private Image ImagenDanho;
     
+    [SerializeField] private float vidas;
+    [SerializeField] private float vidasMaximas = 100f;
+
     [Header("Movimiento")]
     [SerializeField] private float velocidadMovimiento; 
     [SerializeField] private float factorGravedad;
@@ -28,6 +33,8 @@ public class FirstPerson : MonoBehaviour
         controller = GetComponent<CharacterController>();
         //Bloquea el raton en centro de la pantalla y lo oculta
         Cursor.lockState = CursorLockMode.Locked;
+        vidas = vidasMaximas;
+        ImagenDanho.enabled = false;
     }
 
     // Update is called once per frame
@@ -77,9 +84,25 @@ public class FirstPerson : MonoBehaviour
 
     public void RecibirDanho(float danhoEnemigo)
     {
+        if (vidas <= 0) return;
+
         vidas -= danhoEnemigo;
+        StartCoroutine(MostrarDanho());
+        if (vidas <= 0)
+        {
+            Morir();
+        }
     }
-   
+
+    private void Morir()
+    {
+       
+        Time.timeScale = 0f; 
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true;
+        SceneManager.LoadScene(2);
+
+    }
 
     private void Saltar()
     {
@@ -119,5 +142,12 @@ public class FirstPerson : MonoBehaviour
         Gizmos.DrawSphere(pies.position, radioDeteccion);
 
     }
-    
+
+    private IEnumerator MostrarDanho()
+    {
+        ImagenDanho.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        ImagenDanho.enabled = false;
+    }
+
 }

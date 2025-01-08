@@ -7,9 +7,11 @@ public class ArmaAutomatica : MonoBehaviour
 {
     [SerializeField] private ParticleSystem system;
     [SerializeField] private ArmaSO misDatos;
+    [SerializeField] private float tiempoRecarga = 2f;
     private Camera cam;
 
     private float timer;
+    private bool recargando = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,18 @@ public class ArmaAutomatica : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (recargando)
+        {
+            
+            return;
+        }
+
         timer += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.R) && misDatos.balasCargador < misDatos.balasBolsa)
+        {
+            StartCoroutine(Recargar());
+        }
 
         //Si mantengo pulsado clk izq  y el timer supera o iguala cadenciaAtaque...
         if (Input.GetMouseButton(0) && timer >= misDatos.cadenciaAtaque)
@@ -38,8 +51,33 @@ public class ArmaAutomatica : MonoBehaviour
                 }
 
             }
-            timer = 0; //Reinicio el timer para posteerioired disparos
+            misDatos.balasCargador--;
+            timer = 0; 
         }
+
+
     }
-    
+    private IEnumerator Recargar()
+    {
+        recargando = true;
+        
+        yield return new WaitForSeconds(tiempoRecarga);
+
+        
+        int balasFaltantes = misDatos.balasCargador - misDatos.balasBolsa;
+        if (balasFaltantes < 0)
+        {
+            misDatos.balasCargador += Mathf.Abs(balasFaltantes);
+            misDatos.balasBolsa = Mathf.Max(0, misDatos.balasBolsa - Mathf.Abs(balasFaltantes));
+        }
+        else
+        {
+            misDatos.balasCargador = misDatos.balasBolsa;
+            misDatos.balasBolsa = 0;
+        }
+
+        recargando = false; 
+
+    }
+
 }
