@@ -26,6 +26,7 @@ public class FirstPerson : MonoBehaviour
 
 
     CharacterController controller;
+    Coroutine corrutina;
     //Me sirve tanto para la gravedad como para los saltos 
     private Vector3 movimientoVertical;
     void Start()
@@ -87,7 +88,11 @@ public class FirstPerson : MonoBehaviour
         if (vidas <= 0) return;
 
         vidas -= danhoEnemigo;
-        StartCoroutine(MostrarDanho());
+        if(corrutina != null)
+        {
+            StopCoroutine(corrutina);
+        }
+        corrutina = StartCoroutine(MostrarDanho());
         if (vidas <= 0)
         {
             Morir();
@@ -96,9 +101,7 @@ public class FirstPerson : MonoBehaviour
 
     private void Morir()
     {
-       
-        Time.timeScale = 0f; 
-        Cursor.lockState = CursorLockMode.None; 
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         SceneManager.LoadScene(2);
 

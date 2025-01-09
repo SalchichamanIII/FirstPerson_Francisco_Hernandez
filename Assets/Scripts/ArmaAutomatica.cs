@@ -12,9 +12,12 @@ public class ArmaAutomatica : MonoBehaviour
 
     private float timer;
     private bool recargando = false;
+    private int balasActualesCargador, balasActualesBolsa;
     // Start is called before the first frame update
     void Start()
     {
+        balasActualesCargador = misDatos.balasCargador;
+        balasActualesBolsa = misDatos.balasBolsa;
         cam = Camera.main;
         //Me aseguro que el temporizador empiece desde la cadencia 
         //para que podemos disparar desde el inicio
@@ -51,7 +54,7 @@ public class ArmaAutomatica : MonoBehaviour
                 }
 
             }
-            misDatos.balasCargador--;
+            balasActualesCargador--;
             timer = 0; 
         }
 
