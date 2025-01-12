@@ -934,7 +934,7 @@ MonoBehaviour:
   vidas: 100
   danhoEnemigo: 25
   attackPoint: {fileID: 2560640872451026404}
-  radioAtaque: 0.5
+  radioAtaque: 2.42
   queEsDanhable:
     serializedVersion: 2
     m_Bits: 64

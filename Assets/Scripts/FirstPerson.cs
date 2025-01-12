@@ -18,6 +18,7 @@ public class FirstPerson : MonoBehaviour
     [SerializeField] private float velocidadMovimiento; 
     [SerializeField] private float factorGravedad;
     [SerializeField] private float alturaSalto;
+    [SerializeField] private float velocidadSprint;
 
     [Header("Deteccion Suelo")]
     [SerializeField] private float radioDeteccion;
@@ -27,6 +28,7 @@ public class FirstPerson : MonoBehaviour
 
     CharacterController controller;
     Coroutine corrutina;
+    private bool corriendo;
     //Me sirve tanto para la gravedad como para los saltos 
     private Vector3 movimientoVertical;
     void Start()
@@ -58,16 +60,20 @@ public class FirstPerson : MonoBehaviour
         //Calculo el angulo al que tengo que rotarme en funcion de los inputs y camara.
         float angulo = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
         //transform.eulerAngles = new Vector3(0, angulo, 0);
+        float velocidad = Input.GetKey(KeyCode.LeftShift) ? velocidadSprint : velocidadMovimiento;
+
 
         transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         // Si el jugador tocla teclas
         if (input.magnitude > 0 )
         {
-           
-            //Mi movimiento tambien ha quedado rotado en base al angulo calculado.
-            Vector3 movimiento = Quaternion.Euler(0, angulo, 0) * Vector3.forward;
 
-            controller.Move(movimiento * velocidadMovimiento * Time.deltaTime);
+            ////Mi movimiento tambien ha quedado rotado en base al angulo calculado.
+            //Vector3 movimiento = Quaternion.Euler(0, angulo, 0) * Vector3.forward;
+
+            //controller.Move(movimiento * velocidadMovimiento * Time.deltaTime);
+            Vector3 movimiento = Quaternion.Euler(0, angulo, 0) * Vector3.forward;
+            controller.Move(movimiento * velocidad * Time.deltaTime);
         }
 
        
