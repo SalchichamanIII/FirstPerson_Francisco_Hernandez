@@ -1205,8 +1205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e881e544bc1f1047aa61da28a234596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  misDatos: {fileID: 11400000, guid: ac0f86fd56246934bb8d842a2cf3d112, type: 2}
   system: {fileID: 620175750}
+  misDatos: {fileID: 11400000, guid: ac0f86fd56246934bb8d842a2cf3d112, type: 2}
+  tiempoRecarga: 2
 --- !u!1 &620175747
 GameObject:
   m_ObjectHideFlags: 0
@@ -6773,7 +6774,7 @@ Transform:
   m_GameObject: {fileID: 1057229597}
   serializedVersion: 2
   m_LocalRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
-  m_LocalPosition: {x: 134.00414, y: 104.989975, z: 294.9062}
+  m_LocalPosition: {x: 36.00414, y: 104.989975, z: 15.906195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6849,7 +6850,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1715027011}
   - {fileID: 531234937}
   - {fileID: 1477388817}
   - {fileID: 1120474290}
@@ -6868,7 +6868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armas:
-  - {fileID: 1715027010}
   - {fileID: 531234936}
   - {fileID: 1477388816}
   - {fileID: 1884654616}
@@ -7740,37 +7739,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701663535}
   m_CullTransparentMesh: 1
---- !u!1 &1715027010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1715027011}
-  m_Layer: 6
-  m_Name: Manos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1715027011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715027010}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1066025159}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1729557848
 GameObject:
   m_ObjectHideFlags: 0
@@ -7986,7 +7954,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoText: {fileID: 1550697225}
   weaponChanger: {fileID: 1066025160}
-  weapons: []
+  weapons:
+  - {fileID: 531234939}
+  - {fileID: 1477388819}
+  - {fileID: 1884654618}
 --- !u!1 &1792667353
 GameObject:
   m_ObjectHideFlags: 0
@@ -8389,6 +8360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4534b16df13a294995570818c5c3eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  system: {fileID: 0}
+  misDatos: {fileID: 0}
+  tiempoRecarga: 2
   granadaPrefab: {fileID: 6078226545727817567, guid: cf6f2d5a661ca154da951ac247cc7b64,
     type: 3}
   spawnPoint: {fileID: 1622684236}
@@ -13416,7 +13390,7 @@ GameObject:
   - component: {fileID: 2030172265}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13480,7 +13454,7 @@ Transform:
   m_GameObject: {fileID: 2030172260}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07906084, y: 0.09423966, z: -0.011044141, w: 0.99234384}
-  m_LocalPosition: {x: 134, y: 104.40749, z: 295}
+  m_LocalPosition: {x: 36, y: 104.40749, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

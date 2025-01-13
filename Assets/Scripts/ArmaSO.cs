@@ -6,7 +6,7 @@ using UnityEngine;
 public class ArmaSO : ScriptableObject
 {
     //Datos
-    public int balasCargador;
+    public int balasMaximasCargadorç;
     public int balasBolsa;
     public float cadenciaAtaque; 
     public float distanciaAtaque;

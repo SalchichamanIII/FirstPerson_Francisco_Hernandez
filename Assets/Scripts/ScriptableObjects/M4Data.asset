@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f63a770cdaef44b95e2b2c70e13c5b, type: 3}
   m_Name: M4Data
   m_EditorClassIdentifier: 
-  balasCargador: 31
+  "balasMaximasCargador\xE7": 30
   balasBolsa: 120
   cadenciaAtaque: 0.1
   distanciaAtaque: 500

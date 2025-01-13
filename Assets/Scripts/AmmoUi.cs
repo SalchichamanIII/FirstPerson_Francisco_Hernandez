@@ -7,15 +7,18 @@ public class AmmoUi : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI ammoText; 
     [SerializeField] private WeaponChanger weaponChanger;
-    [SerializeField] private ArmaAutomatica[] weapons; 
+    [SerializeField] private Arma[] weapons;
+
+    int currentWeaponIndex;
+    Arma currentWeapon;
 
     void Update()
     {
         
-        int currentWeaponIndex = weaponChanger.GetCurrentWeaponIndex();
-        ArmaAutomatica currentWeapon = weapons[currentWeaponIndex];
+        currentWeaponIndex = weaponChanger.GetCurrentWeaponIndex();
+        currentWeapon = weapons[currentWeaponIndex];
 
         
-        ammoText.text = $"{currentWeapon.GetCurrentAmmo()}/{currentWeapon.GetReserveAmmo()}";
+        ammoText.text = "" + currentWeapon.BalasActualesCargador + "/" + currentWeapon.BalasActualesBolsa;
     }
 }

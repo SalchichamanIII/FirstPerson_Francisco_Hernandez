@@ -3,27 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 
-public class ArmaAutomatica : MonoBehaviour
+public class ArmaAutomatica : Arma
 {
-    [SerializeField] private ParticleSystem system;
-    [SerializeField] private ArmaSO misDatos;
-    [SerializeField] private float tiempoRecarga = 2f;
-    private Camera cam;
-
-    private float timer;
-    private bool recargando = false;
-    private int balasActualesCargador, balasActualesBolsa;
-    // Start is called before the first frame update
-    void Start()
-    {
-        balasActualesCargador = misDatos.balasCargador;
-        balasActualesBolsa = misDatos.balasBolsa;
-        cam = Camera.main;
-        //Me aseguro que el temporizador empiece desde la cadencia 
-        //para que podemos disparar desde el inicio
-        timer = misDatos.cadenciaAtaque;
-
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -36,7 +18,7 @@ public class ArmaAutomatica : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.R) && misDatos.balasCargador < misDatos.balasBolsa)
+        if (Input.GetKeyDown(KeyCode.R) && balasActualesCargador < misDatos.balasMaximasCargadorç)
         {
             StartCoroutine(Recargar());
         }
@@ -59,38 +41,6 @@ public class ArmaAutomatica : MonoBehaviour
         }
 
 
-    }
-    private IEnumerator Recargar()
-    {
-        recargando = true;
-        
-        yield return new WaitForSeconds(tiempoRecarga);
-
-        
-        int balasFaltantes = misDatos.balasCargador - misDatos.balasBolsa;
-        if (balasFaltantes < 0)
-        {
-            misDatos.balasCargador += Mathf.Abs(balasFaltantes);
-            misDatos.balasBolsa = Mathf.Max(0, misDatos.balasBolsa - Mathf.Abs(balasFaltantes));
-        }
-        else
-        {
-            misDatos.balasCargador = misDatos.balasBolsa;
-            misDatos.balasBolsa = 0;
-        }
-
-        recargando = false; 
-
-    }
-
-    public int GetCurrentAmmo()
-    {
-        return balasActualesCargador;
-    }
-
-    public int GetReserveAmmo()
-    {
-        return balasActualesBolsa;
     }
 
 }
