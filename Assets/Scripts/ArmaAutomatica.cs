@@ -83,4 +83,14 @@ public class ArmaAutomatica : MonoBehaviour
 
     }
 
+    public int GetCurrentAmmo()
+    {
+        return balasActualesCargador;
+    }
+
+    public int GetReserveAmmo()
+    {
+        return balasActualesBolsa;
+    }
+
 }

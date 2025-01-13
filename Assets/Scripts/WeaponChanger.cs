@@ -76,4 +76,9 @@ public class WeaponChanger : MonoBehaviour
 
         indiceArmaActual = indiceNuevaArma;
     }
+
+    public int GetCurrentWeaponIndex()
+    {
+        return indiceArmaActual;
+    }
 }
