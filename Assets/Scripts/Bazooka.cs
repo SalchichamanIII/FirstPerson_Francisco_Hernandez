@@ -10,10 +10,26 @@ public class Bazooka : Arma
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Instantiate(granadaPrefab, spawnPoint.position, transform.rotation);
-            
-        }
+       
+            if (recargando || balasActualesCargador <= 0)
+            {
+                return;
+            }
+
+           
+            if (Input.GetKeyDown(KeyCode.R) && balasActualesBolsa > 0)
+            {
+                StartCoroutine(Recargar());
+            }
+
+           
+            if (Input.GetMouseButtonDown(0) && balasActualesCargador > 0)
+            {
+
+                Instantiate(granadaPrefab, spawnPoint.position, transform.rotation);
+                balasActualesCargador--;
+            }
+        
     }
 }
+

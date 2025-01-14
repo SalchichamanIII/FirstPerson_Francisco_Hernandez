@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f63a770cdaef44b95e2b2c70e13c5b, type: 3}
   m_Name: ClusterData
   m_EditorClassIdentifier: 
-  balasCargador: 3
-  balasBolsa: 5
+  "balasMaximasCargador\xE7": 6
+  balasBolsa: 0
   cadenciaAtaque: 8
   distanciaAtaque: 1000
   danhoAtaque: 500

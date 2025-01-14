@@ -9,6 +9,7 @@ public class AmmoBox : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
+
     public void AbrirCaja()
     {
         anim.SetTrigger("abrir");

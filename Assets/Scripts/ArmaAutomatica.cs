@@ -5,8 +5,9 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class ArmaAutomatica : Arma
 {
-    
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip disparoClip;
     // Update is called once per frame
     void Update()
     {
@@ -24,8 +25,13 @@ public class ArmaAutomatica : Arma
         }
 
         //Si mantengo pulsado clk izq  y el timer supera o iguala cadenciaAtaque...
-        if (Input.GetMouseButton(0) && timer >= misDatos.cadenciaAtaque)
+        if (Input.GetMouseButton(0) && timer >= misDatos.cadenciaAtaque && balasActualesCargador > 0)
         {
+
+            if (audioSource != null && disparoClip != null)
+            {
+                audioSource.PlayOneShot(disparoClip);
+            }
             //Puedodisparar
             system.Play();//Ejecuto sistema de particulas
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitInfo, misDatos.distanciaAtaque))
