@@ -9,7 +9,10 @@ public class Victoria : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+           
             SceneManager.LoadScene(3);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
     }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuPausa : MonoBehaviour
 {
     [SerializeField] private GameObject menuPausaUI; // Panel del menú de pausa
+    [SerializeField] private AudioSource musicaFondo;
 
     private bool estaPausado = false;
 
@@ -31,7 +32,11 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 0f; 
         estaPausado = true;
         Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = true; 
+        Cursor.visible = true;
+        if (musicaFondo != null)
+        {
+            musicaFondo.Pause();
+        }
     }
 
     public void Reanudar()
@@ -41,6 +46,10 @@ public class MenuPausa : MonoBehaviour
         estaPausado = false;
         Cursor.lockState = CursorLockMode.Locked; 
         Cursor.visible = false;
+        if (musicaFondo != null)
+        {
+            musicaFondo.UnPause();
+        }
     }
 
     public void Salir()
