@@ -9491,6 +9491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPausaUI: {fileID: 1046295678}
+  musicaFondo: {fileID: 682143654}
 --- !u!114 &1788779319
 MonoBehaviour:
   m_ObjectHideFlags: 0
